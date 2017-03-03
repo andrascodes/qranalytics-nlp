@@ -27,4 +27,4 @@ def predict_cluster(new_data):
     word_indexes = km.cluster_centers_[prediction].argsort()[::-1][:6]
     term_names = tfidf_vectorizer.get_feature_names()
 
-    return [prediction, list(map(lambda x: get_feature_token(x, term_names, vocab_frame), word_indexes))]
+    return [prediction.tolist(), list(map(lambda x: get_feature_token(x, term_names, vocab_frame), word_indexes))]
