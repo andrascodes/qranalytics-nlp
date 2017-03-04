@@ -7,7 +7,8 @@ app = Flask(__name__)
 
 @app.route('/cluster', methods=['POST'])
 def get_cluster():
-
+    
+    # try:
     request_data = request.get_json()
 
     cluster = predict_cluster(request_data['text'])
@@ -17,10 +18,13 @@ def get_cluster():
     }
 
     return jsonify(response)
+    # except Exception as e:
+    #     return jsonify(e)
 
 @app.route('/sentiment', methods=['POST'])
 def get_sentiment():
 
+    # try:
     request_data = request.get_json()
 
     sentiment = predict_sentiment(request_data['text'])
@@ -28,6 +32,16 @@ def get_sentiment():
         'sentiment': sentiment
     }
 
+    return jsonify(response)
+    # except Exception as e:
+    #     return jsonify({ 'error': str(e) })
+
+@app.errorhandler(Exception)
+def unhandled_exception(e):
+    response = {
+        'error': repr(e),
+        'args': e.args
+    }
     return jsonify(response)
 
 if __name__ == '__main__':
