@@ -11,7 +11,6 @@ def get_cluster():
     request_data = request.get_json()
 
     cluster = predict_cluster(request_data['text'])
-    print(cluster)
     response = {
         'clusterId': cluster[0],
         'label': cluster[1]
