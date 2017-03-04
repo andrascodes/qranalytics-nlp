@@ -1,6 +1,8 @@
 from predict_conversation_cluster import predict_cluster
 from predict_message_sentiment import predict_sentiment
 
+import traceback
+
 from flask import Flask, jsonify, request
 app = Flask(__name__)
 
@@ -39,8 +41,7 @@ def get_sentiment():
 @app.errorhandler(Exception)
 def unhandled_exception(e):
     response = {
-        'error': repr(e),
-        'args': e.args
+        'error': traceback.format_exc(e)
     }
     return jsonify(response)
 

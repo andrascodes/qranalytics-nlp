@@ -2,6 +2,8 @@ import re
 import nltk
 from nltk.stem.snowball import SnowballStemmer
 
+nltk.data.path.append('./nltk_data')
+
 stemmer = SnowballStemmer("english")
 
 def tokenize_only(text):
