@@ -1,0 +1,7 @@
+nomkl
+scipy
+numpy
+pandas
+nltk
+scikit-learn
+gunicorn
