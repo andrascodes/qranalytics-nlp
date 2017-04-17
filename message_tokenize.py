@@ -19,10 +19,12 @@ def tokenize_only(text):
                         'galaxy', 'nexus', 'cream', 'window', 'ballmer', 'yahoo', 'sandwich', 'icloud', 'samsung']
 
         return all([(w not in token) for w in tw_stopwords])
+        
     filtered_tokens = list(filter(match_twitter_stopwords, filtered_tokens))
 
     def hasNoNumbers(token):
         return all([not char.isdigit() for char in token])
+
     filtered_tokens = list(filter(hasNoNumbers, filtered_tokens))
 
     return filtered_tokens
@@ -31,8 +33,3 @@ def tokenize_and_stem(text):
     filtered_tokens = tokenize_only(text)
     stems = list(map(stemmer.stem, filtered_tokens))
     return stems
-
-# def get_feature_token(ind, terms, vocabulary):
-#     feature_stem = terms[ind].split(' ')
-#     token = vocabulary.ix[feature_stem].values.tolist()[0][0]
-#     return token

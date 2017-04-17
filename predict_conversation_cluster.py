@@ -3,22 +3,19 @@ import json
 import pandas as pd
 import os
 
-from conversation_tokenize import tokenize_only, tokenize_and_stem, get_feature_token
+from conversation_tokenize import tokenize_only, tokenize_and_stem
 
-dir = os.path.dirname(__file__)
-
-# tfidf_vectorizer = joblib.load(os.path.join(dir, './clustering_models/tfidf_vectorizer.pkl'))
-# km = joblib.load(os.path.join(dir, './clustering_models/kmeans_model.pkl'))
-# vocab_frame = pd.read_pickle(os.path.join(dir, './clustering_models/vocab_frame.pkl'))
 tfidf_vectorizer = joblib.load('./clustering_models/tfidf_vectorizer.pkl')
 km = joblib.load('./clustering_models/kmeans_model.pkl')
 vocab_frame = pd.read_pickle('./clustering_models/vocab_frame.pkl')
 
-# with open('conversations.json', 'r') as f:
-#      conversations = json.load(f)
-
 
 def predict_cluster(new_data):
+    def get_feature_token(ind, terms, vocabulary):
+        feature_stem = terms[ind].split(' ')
+        token = vocabulary.ix[feature_stem].values.tolist()[0][0]
+        return token
+
     new_data = [new_data]
     new_data_frame = pd.DataFrame(tfidf_vectorizer.transform(new_data).toarray())
 

@@ -9,34 +9,39 @@ app = Flask(__name__)
 
 @app.route('/cluster', methods=['POST'])
 def get_cluster():
-    
-    # try:
+
     request_data = request.get_json()
+    text = request_data['text']
+    if isinstance(text, basestring):
+        cluster = predict_cluster(text)
+        response = {
+            'clusterId': cluster[0],
+            'label': cluster[1]
+        }
 
-    cluster = predict_cluster(request_data['text'])
-    response = {
-        'clusterId': cluster[0],
-        'label': cluster[1]
-    }
-
-    return jsonify(response)
-    # except Exception as e:
-    #     return jsonify(e)
+        return jsonify(response)
+    else:
+        return jsonify({
+            'error': 'Not a string value'
+        })
 
 @app.route('/sentiment', methods=['POST'])
 def get_sentiment():
 
-    # try:
     request_data = request.get_json()
+    text = request_data['text']
 
-    sentiment = predict_sentiment(request_data['text'])
-    response = {
-        'sentiment': sentiment
-    }
+    if isinstance(text, basestring):
+        sentiment = predict_sentiment(text)
+        response = {
+            'sentiment': sentiment
+        }
 
-    return jsonify(response)
-    # except Exception as e:
-    #     return jsonify({ 'error': str(e) })
+        return jsonify(response)
+    else:
+        return jsonify({
+            'error': 'Not a string value'
+        })
 
 @app.errorhandler(Exception)
 def unhandled_exception(e):
@@ -46,5 +51,5 @@ def unhandled_exception(e):
     return jsonify(response)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=5555)
     

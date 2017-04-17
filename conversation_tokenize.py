@@ -18,7 +18,7 @@ def tokenize_and_stem(text):
     stems = list(map(stemmer.stem, filtered_tokens))
     return stems
 
-def get_feature_token(ind, terms, vocabulary):
-    feature_stem = terms[ind].split(' ')
-    token = vocabulary.ix[feature_stem].values.tolist()[0][0]
-    return token
+# def get_feature_token(ind, terms, vocabulary):
+#     feature_stem = terms[ind].split(' ')
+#     token = vocabulary.ix[feature_stem].values.tolist()[0][0]
+#     return token
