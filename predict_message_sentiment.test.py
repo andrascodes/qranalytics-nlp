@@ -8,7 +8,7 @@ class TestPredictSentiment(unittest.TestCase):
         self.assertEqual(predict_sentiment('love'), 'negative')
 
     def test_negative(self):
-        self.assertEqual(predict_sentiment('fuck'), 'negative')
+        self.assertEqual(predict_sentiment('bad'), 'negative')
 
     def test_neutral(self):
         self.assertEqual(predict_sentiment('This is a neutral sentence.'), 'neutral')

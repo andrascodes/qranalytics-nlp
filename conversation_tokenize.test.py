@@ -12,8 +12,7 @@ class TestPredictSentiment(unittest.TestCase):
             ['this', 'apple', 'iphone', 'is', 'going', 'to', 'be', 'a', 'lovely', 'present']
         )
 
-    # tokenize_and_stem: 
-    # should remove nouns such as apple and iphone
+    # tokenize_and_stem:
     # should remove numbers
     # should stem the words
     def test_tokenize_and_stem(self):
